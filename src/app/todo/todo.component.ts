@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TodoService } from './data-access/todo.service';
 
 import { todo } from './data-access/todo.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo',
@@ -17,21 +17,18 @@ import { Observable } from 'rxjs';
 })
 export class TodoComponent implements OnInit {
 
-  todoList: todo[] = []
+  todoList$: Observable<todo[]> = new Observable()
 
   constructor(private todoService: TodoService) {
 
   }
 
   ngOnInit(): void {
-    this.todoService.getTodoList().subscribe(
-      list => this.todoList = list
-    )
+    this.todoList$ = this.todoService.getTodoList()
   }
 
-  onTodoCheck(event: Event, todo: todo) {
-    console.log('Todo id' + todo.id + ' was checked to ' + (<HTMLInputElement>event.target).checked)
+  onTodoCheck(todo: todo) {
     todo.isDone = !todo.isDone
-    this.todoService.updateTodoList(this.todoList)
+    this.todoService.updateTodoList(todo)
   }
 }

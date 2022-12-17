@@ -1,5 +1,4 @@
 <p>Done Tasks</p>
-<button (click)="updateList()">Update</button>
 <div *ngFor="let doneTask of doneTasks$ | async">
-  {{doneTask.task}}
+  {{doneTask.task}} - {{doneTask.isDone}}
 </div>

@@ -26,11 +26,5 @@ export class DoneListComponent implements OnInit {
   
   ngOnInit(): void {
     this.doneTasks$ = this.todoService.getTodoList()
-      .pipe(map(todoList => todoList.filter(todo => todo.isDone == true)))
-  }
-
-  updateList() {
-    
-    console.log(this.doneTasks$)
   }
 }
