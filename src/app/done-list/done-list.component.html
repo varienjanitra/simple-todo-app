@@ -1,4 +1,6 @@
 <p>Done Tasks</p>
 <div *ngFor="let doneTask of doneTasks$ | async">
-  {{doneTask.task}} - {{doneTask.isDone}}
+  <div *ngIf="doneTask.isDone">
+    {{doneTask.task}}
+  </div>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoService } from '../todo/data-access/todo.service';
 import { todo } from '../todo/data-access/todo.model';
-import { Observable, map } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 
 @Component({
   selector: 'app-done-list',
