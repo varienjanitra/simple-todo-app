@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoService } from '../todo/data-access/todo.service';
 import { todo } from '../todo/data-access/todo.model';
-import { Observable, filter } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-done-list',
@@ -18,13 +18,13 @@ import { Observable, filter } from 'rxjs';
 })
 export class DoneListComponent implements OnInit {
 
-  doneTasks$: Observable<todo[]> = new Observable()
+  todoList$ = new Observable<todo[]>
 
   constructor(private todoService: TodoService) {
 
   }
   
-  ngOnInit(): void {
-    this.doneTasks$ = this.todoService.getTodoList()
+  ngOnInit() {
+    this.todoList$ = this.todoService.getTodoList()
   }
 }

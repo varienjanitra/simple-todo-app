@@ -1,0 +1,15 @@
+.app-header {
+  background: cyan;
+  margin: 0px;
+  padding: 0.5rem;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.app-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

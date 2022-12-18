@@ -1,6 +1,7 @@
 <p>Done Tasks</p>
-<div *ngFor="let doneTask of doneTasks$ | async">
-  <div *ngIf="doneTask.isDone">
-    {{doneTask.task}}
+<div *ngFor="let todo of todoList$ | async">
+  <!--{{todo.task}} - {{todo.isDone}} -->
+  <div *ngIf="todo.isDone === true">
+    {{todo.task}}
   </div>
 </div>

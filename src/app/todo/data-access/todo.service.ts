@@ -7,20 +7,21 @@ import { todo } from './todo.model';
 @Injectable()
 export class TodoService {
 
+  private todoList: todo[] = todoListDummy
+  
+  private _todoList$: BehaviorSubject<todo[]> = new BehaviorSubject(this.todoList)
+  public todoList$ = this._todoList$.asObservable()
+
   constructor() { }
 
-  todoList: todo[] = todoListDummy
-
-  todoList$: BehaviorSubject<todo[]> = new BehaviorSubject(this.todoList)
-
   getTodoList(): Observable<todo[]> {
-    return this.todoList$.asObservable()
+    return this.todoList$
   }
 
   updateTodoList(updatedTodo: todo): void {
     let todoIndex = this.todoList.findIndex(todo => todo.id == updatedTodo.id)
     this.todoList[todoIndex].isDone = updatedTodo.isDone
     
-    this.todoList$.next(this.todoList)
+    this._todoList$.next(this.todoList)
   }
 }
