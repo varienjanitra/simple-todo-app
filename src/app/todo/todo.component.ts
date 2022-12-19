@@ -15,7 +15,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss']
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent {
 
   todoList$: Observable<todo[]> = new Observable()
 
@@ -24,11 +24,10 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.todoList$ = this.todoService.getTodoList()
+    this.todoList$ = this.todoService.todoList$
   }
 
   onTodoCheck(todo: todo) {
     todo.isDone = !todo.isDone
-    this.todoService.updateTodoList(todo)
   }
 }

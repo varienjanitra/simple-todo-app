@@ -12,4 +12,9 @@ p {
 .app-grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 250px;
+  grid-template-areas: 
+  "check-list done-list"
+  "check-list pending-list";
+  grid-template-columns: 1fr 1fr;
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoComponent } from './todo/todo.component';
 import { DoneListComponent } from './done-list/done-list.component';
+import { PendingListComponent } from './pending-list/pending-list.component';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { DoneListComponent } from './done-list/done-list.component';
   imports: [
     CommonModule,
     TodoComponent,
-    DoneListComponent
+    DoneListComponent,
+    PendingListComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
