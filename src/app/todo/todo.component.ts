@@ -3,15 +3,13 @@ import { CommonModule } from '@angular/common';
 import { TodoService } from './data-access/todo.service';
 
 import { todo } from './data-access/todo.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-todo',
   standalone: true,
   imports: [CommonModule],
-  providers: [
-    TodoService
-  ],
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss']
 })
@@ -24,10 +22,19 @@ export class TodoComponent {
   }
 
   ngOnInit(): void {
-    this.todoList$ = this.todoService.todoList$
+    this.todoList$ = this.todoService.todoList$.pipe(
+      tap(
+        data => {
+          console.log('From Subscriber')
+          console.log(data)
+        }
+      )
+    )
   }
 
-  onTodoCheck(todo: todo) {
-    todo.isDone = !todo.isDone
+  onTodoCheck(currentTodo: todo) {
+    let updatedTodo: todo = structuredClone(currentTodo)
+    updatedTodo.isDone = !updatedTodo.isDone
+    this.todoService.updateTodoList(updatedTodo)
   }
 }

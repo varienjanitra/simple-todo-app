@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodoService } from '../todo/data-access/todo.service';
-import { todo } from '../todo/data-access/todo.model';
+import { TodoService } from '../../data-access/todo.service';
+import { todo } from '../../data-access/todo.model'
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -9,9 +9,6 @@ import { Observable, map } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule
-  ],
-  providers: [
-    TodoService
   ],
   templateUrl: './done-list.component.html',
   styleUrls: ['./done-list.component.scss']
@@ -24,8 +21,7 @@ export class DoneListComponent {
 
   }
   
-  ngDoCheck() {
-    console.log('Log')
+  ngOnInit() {
     this.doneList$ = this.todoService.todoList$
       .pipe(
         map(data => data.filter(todo => todo.isDone === true))

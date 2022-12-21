@@ -4,18 +4,50 @@ import { todoListDummy } from './todo.dummy';
 
 import { todo } from './todo.model';
 
-@Injectable()
-export class TodoService {
+/**
+ * Todo Service for sharing application state
+ * While this comment might be obvious for some experienced Angular programmer
+ * But because I am still learning, so it might be worthwhile to keep this finding written here
+ * So that I would not forget this finding
+ * 
+ * A shared service like this Todo Service SHALL BE:
+ * 1. A singleton provided in the root, meaning that the @'injectable decorator shall be provided in root
+ * https://angular.io/guide/singleton-services#providing-a-singleton-service
+ * and EACH component requiring this service shall be requesting the service via dependency injection,
+ * NOT in providers list
+ * 
+ * Failure to do so WILL cause the service to be instantiated multiple times thus FAILURE in sharing the application state
+ */
 
-  private todoList: todo[] = todoListDummy
-  
-  todoList$: Observable<todo[]> = new Observable<todo[]>((subscriber) => {
-    subscriber.next(this.todoList)
-  })
+@Injectable({
+  providedIn: 'root'
+})
+export class TodoService {
+ 
+  _todoList$: BehaviorSubject<todo[]> = new BehaviorSubject<todo[]>([])
+  todoList$ = this._todoList$.asObservable()
 
   constructor() { }
 
   updateTodoList(updatedTodo: todo): void {
-    this.todoList.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo)
+    let updatedTodoList = this._todoList$.value.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo)
+    this._todoList$.next(updatedTodoList)
+  }
+
+  addTodo(newTodoTask: string): void {
+    let updatedTodoList = structuredClone(this._todoList$.value)
+
+    console.log('From Service (before add)')
+    console.log(this._todoList$.value)
+
+    updatedTodoList.push({
+      id: this._todoList$.value.length + 1, 
+      task: newTodoTask, isDone: 
+      false
+    })
+
+    this._todoList$.next(updatedTodoList)
+    console.log('From Service (after add)')
+    console.log(this._todoList$.value)
   }
 }
