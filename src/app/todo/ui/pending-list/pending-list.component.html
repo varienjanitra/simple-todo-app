@@ -1,4 +1,4 @@
-<p>Pending Tasks</p>
-<div *ngFor="let todo of pendingList$ | async">
+<div class="header">Pending Tasks</div>
+<div class="pending-task" *ngFor="let todo of pendingList$ | async">
   {{todo.task}}
 </div>

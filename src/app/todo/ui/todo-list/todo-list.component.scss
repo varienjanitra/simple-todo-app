@@ -1,5 +1,5 @@
 :host {
-  grid-area: pending-list;
+  grid-area: todo-list;
   overflow: auto;
 }
 
@@ -11,6 +11,8 @@
   top: 0;
 }
 
-.pending-task {
+.todo-list {
+  display: flex;
+  flex-direction: row;
   overflow-y: auto;
 }

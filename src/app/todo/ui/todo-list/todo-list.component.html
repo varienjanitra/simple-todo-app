@@ -1,0 +1,5 @@
+<div class="header">Todo List</div>
+<div class="todo-list" *ngFor="let todo of todoList$ | async">
+  <input type="checkbox" [checked]="todo.isDone" (change)="onTodoCheck(todo)">
+  <p>{{todo.task}}</p>
+</div>

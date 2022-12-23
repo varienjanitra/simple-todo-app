@@ -24,7 +24,7 @@ import { todo } from './todo.model';
 })
 export class TodoService {
  
-  _todoList$: BehaviorSubject<todo[]> = new BehaviorSubject<todo[]>([])
+  _todoList$: BehaviorSubject<todo[]> = new BehaviorSubject<todo[]>(todoListDummy)
   todoList$ = this._todoList$.asObservable()
 
   constructor() { }

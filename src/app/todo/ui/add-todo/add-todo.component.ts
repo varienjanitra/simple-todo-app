@@ -13,13 +13,16 @@ import { TodoService } from '../../data-access/todo.service';
   templateUrl: './add-todo.component.html',
   styleUrls: ['./add-todo.component.scss']
 })
-export class AddTodoComponent {
+export class AddTodoListComponent {
 
   addedTodo: string = ''
 
   constructor(private todoService: TodoService) {}
 
   onAddTodo() {
-    this.todoService.addTodo(this.addedTodo)
+    if(this.addedTodo !== '') {
+      this.todoService.addTodo(this.addedTodo)
+      this.addedTodo = ''
+    }
   }
 }

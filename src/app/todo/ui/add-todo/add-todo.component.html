@@ -1,3 +1,5 @@
-<p>Add todo Task</p>
-<input type="text" [(ngModel)]="addedTodo">
-<button (click)="onAddTodo()">Add todo</button>
+<div class="header">Add todo Task</div>
+<div class="input-area">
+  <input type="text" [(ngModel)]="addedTodo" (keyup.enter)="onAddTodo()">
+  <button (click)="onAddTodo()">Add todo</button>
+</div>

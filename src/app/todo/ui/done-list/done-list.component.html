@@ -1,4 +1,4 @@
-<p>Done Tasks</p>
-<div *ngFor="let todo of doneList$ | async">
+<div class="header">Done Tasks</div>
+<div class="done-task" *ngFor="let todo of doneList$ | async">
   {{todo.task}}
 </div>

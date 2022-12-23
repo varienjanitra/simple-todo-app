@@ -1,8 +1,44 @@
-:host {
-  grid-area: check-list;
+.grid-container {
+  display: grid;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+
+  grid-template-rows: 50px auto;
+  grid-template-areas: 
+  "todo-header"
+  "todo-grid-container"
 }
 
-.todoList {
-  display: flex;
-  flex-direction: row;
+.todo-header {
+  grid-area: todo-header;
+  padding: 1rem;
+  background-color: cyan;
+  border-radius: 0.5rem;
+}
+
+.todo-grid-container {
+  display: grid;
+  grid-area: todo-grid-container;
+  column-gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+  "todo-list-edit-view todo-list-view"
+}
+
+.todo-list-edit-view {
+  display: grid;
+  grid-area: todo-list-edit-view;
+  grid-template-rows: 100px 400px;
+  grid-template-areas: 
+  "add-todo"
+  "todo-list"
+}
+
+.todo-list-view {
+  display: grid;
+  grid-area: todo-list-view;
+  grid-template-rows: 260px 260px;
+  grid-template-areas: 
+  "done-list"
+  "pending-list"
 }
