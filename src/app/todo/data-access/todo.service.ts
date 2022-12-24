@@ -24,33 +24,39 @@ import { todo } from './todo.model';
 })
 export class TodoService {
  
-  _todoList$: BehaviorSubject<todo[]> = new BehaviorSubject<todo[]>(todoListDummy)
-  todoList$ = this._todoList$.asObservable()
+  private todoListSource$: BehaviorSubject<todo[]> = new BehaviorSubject<todo[]>([])
 
-  constructor() { }
-
-  updateTodoList(updatedTodo: todo): void {
-    let updatedTodoList = this._todoList$.value.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo)
-    this._todoList$.next(updatedTodoList)
+  constructor() {
+    this.todoListSource$.next(todoListDummy)
   }
 
-  addTodo(newTodoTask: string): void {
-    let updatedTodoList = structuredClone(this._todoList$.value)
+  get todoList$() {
+    return this.todoListSource$.asObservable()
+  }
+
+  checkTodo(checkedTodo: todo): void {
+    let updatedTodoList = this.todoListSource$.value.map(todo => todo.id === checkedTodo.id ? checkedTodo : todo)
+    
+    this.todoListSource$.next(updatedTodoList)
+  }
+
+  addTodo(newTodo: string): void {
+    let updatedTodoList = structuredClone(this.todoListSource$.value)
 
     updatedTodoList.push({
-      id: this._todoList$.value.length + 1, 
-      task: newTodoTask, isDone: 
+      id: this.todoListSource$.value.length + 1, 
+      task: newTodo, isDone: 
       false
     })
 
-    this._todoList$.next(updatedTodoList)
+    this.todoListSource$.next(updatedTodoList)
   }
 
   deleteTodo(deletedTodo: todo): void {
-    let updatedTodoList = structuredClone(this._todoList$.value)
+    let updatedTodoList = structuredClone(this.todoListSource$.value)
 
     updatedTodoList = updatedTodoList.filter(todo => todo.id !== deletedTodo.id)
 
-    this._todoList$.next(updatedTodoList)
+    this.todoListSource$.next(updatedTodoList)
   }
 }

@@ -31,10 +31,10 @@ export class TodoListComponent {
     )
   }
 
-  onTodoCheck(currentTodo: todo) {
-    let updatedTodo: todo = structuredClone(currentTodo)
+  onTodoCheck(checkedTodo: todo) {
+    let updatedTodo: todo = structuredClone(checkedTodo)
     updatedTodo.isDone = !updatedTodo.isDone
-    this.todoService.updateTodoList(updatedTodo)
+    this.todoService.checkTodo(updatedTodo)
   }
 
   onTodoDelete(currentTodo: todo) {
