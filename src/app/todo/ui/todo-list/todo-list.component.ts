@@ -36,4 +36,9 @@ export class TodoListComponent {
     updatedTodo.isDone = !updatedTodo.isDone
     this.todoService.updateTodoList(updatedTodo)
   }
+
+  onTodoDelete(currentTodo: todo) {
+    let deletedTodo: todo = structuredClone(currentTodo)
+    this.todoService.deleteTodo(deletedTodo)
+  }
 }

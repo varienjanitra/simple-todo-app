@@ -37,9 +37,6 @@ export class TodoService {
   addTodo(newTodoTask: string): void {
     let updatedTodoList = structuredClone(this._todoList$.value)
 
-    console.log('From Service (before add)')
-    console.log(this._todoList$.value)
-
     updatedTodoList.push({
       id: this._todoList$.value.length + 1, 
       task: newTodoTask, isDone: 
@@ -47,7 +44,13 @@ export class TodoService {
     })
 
     this._todoList$.next(updatedTodoList)
-    console.log('From Service (after add)')
-    console.log(this._todoList$.value)
+  }
+
+  deleteTodo(deletedTodo: todo): void {
+    let updatedTodoList = structuredClone(this._todoList$.value)
+
+    updatedTodoList = updatedTodoList.filter(todo => todo.id !== deletedTodo.id)
+
+    this._todoList$.next(updatedTodoList)
   }
 }

@@ -1,5 +1,5 @@
 <div class="header">Todo List</div>
 <div class="todo-list" *ngFor="let todo of todoList$ | async">
   <input type="checkbox" [checked]="todo.isDone" (change)="onTodoCheck(todo)">
-  <p>{{todo.task}}</p>
+  <p>{{todo.task}}</p> <span class="spacer"></span> <button (click)="onTodoDelete(todo)">Delete</button>
 </div>
